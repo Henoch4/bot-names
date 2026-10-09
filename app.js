@@ -40,6 +40,10 @@ const CONTRACTS = {
     bn: '0x2d41cdfbaC769696f5c2cA1630a293c28B2BEC2E',
     twbot: '0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0',
   },
+  677: {
+    bn: '0x2a5E0eBDb19dE0A360edB101436c6B6f3A7f1dc7',
+    twbot: '0xD5452816194a3784dBa983426cCe7c122F4abd30',
+  },
 };
 
 const $ = (id) => document.getElementById(id);
@@ -49,7 +53,7 @@ const dateStr = (ts) => (ts > 0n ? new Date(Number(ts) * 1000).toISOString().sli
 
 let appkit = null;
 let readProvider;
-let currentChainId = 968;
+let currentChainId = 677;
 let account = null;
 
 function initAppKit() {
@@ -140,7 +144,7 @@ async function runSearch() {
   try {
     const [avail, owner, exp] = await Promise.all([bn.isAvailable(label), bn.resolve(label), bn.resolve(label).then((r) => r[1]).catch(() => 0n)]);
     if (avail && owner === ethers.ZeroAddress) {
-      out.innerHTML = `<b>${label}.bot</b> — AVAILABLE ✓ · register now for 0.1 TWBOT/year`;
+      out.innerHTML = `<b>${label}.bot</b> — AVAILABLE ✓ · register now for 0.1 WBOT/year`;
     } else if (avail) {
       out.innerHTML = `<b>${label}.bot</b> — AVAILABLE ✓ (previous registration expired ${dateStr(exp)})`;
     } else {
@@ -153,7 +157,7 @@ async function runSearch() {
 
 async function signerOrAlert() {
   if (!account) { appkit?.open(); return null; }
-  if (currentChainId !== 968) { alert('Demo contracts are deployed on Testnet 968. Switch network in your wallet.'); return null; }
+  if (!CONTRACTS[currentChainId]) { alert('No contracts on this network in this app. Switch to BOT Chain 677 or Testnet 968.'); return null; }
   const s = await appkit?.getSigner();
   if (!s) { appkit?.open(); return null; }
   return s;
@@ -232,7 +236,7 @@ async function manageAction(action) {
 }
 
 function boot() {
-  readProvider = new ethers.JsonRpcProvider('https://rpc.bohr.life');
+  readProvider = new ethers.JsonRpcProvider(currentChainId === 677 ? 'https://rpc.botchain.ai' : 'https://rpc.bohr.life');
   initAppKit();
   $('sBtn')?.addEventListener('click', runSearch);
   $('sInput')?.addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });

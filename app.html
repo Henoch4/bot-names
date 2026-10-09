@@ -83,21 +83,21 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <a href="index.html">Home</a>
 <a href="app.html" class="on">App</a>
 <a href="docs.html">Docs</a>
-<select id="netSel"><option value="968" selected>Testnet 968</option><option value="677">Mainnet 677</option></select>
+<select id="netSel"><option value="968">Testnet 968</option><option value="677" selected>Mainnet 677</option></select>
 <button class="btn btn-a" id="connectBtn">Connect wallet</button>
 </div>
 </div></nav>
 
 <div class="ticker">
-<div class="cell"><span class="k">Annual fee</span><span class="v" id="tFee">0.1 TWBOT</span></div>
+<div class="cell"><span class="k">Annual fee</span><span class="v" id="tFee">0.1 WBOT</span></div>
 <div class="cell"><span class="k">Names registered</span><span class="v" id="tCount">—</span></div>
-<div class="cell"><span class="k">Your TestWBOT</span><span class="v" id="tBal">—</span></div>
+<div class="cell"><span class="k">Your WBOT</span><span class="v" id="tBal">—</span></div>
 </div>
 
 <div class="wrap">
 <div class="page-head">
 <h1>Name service</h1>
-<span class="badge">Registry · chain 968</span>
+<span class="badge">Registry · chain 677</span>
 </div>
 
 <div class="search-bar">
@@ -119,7 +119,7 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <div class="panel">
 <div class="panel-head"><h3>Register</h3><div class="dot"></div></div>
 <div class="row"><label>Label</label><input id="rLabel" placeholder="yourname" spellcheck="false"><span style="color:var(--accent);font-weight:700">.bot</span></div>
-<div class="row" style="border-bottom:none"><span></span><span class="hint" style="padding:0">0.1 TWBOT / year · 3–32 chars</span><button class="btn btn-a" id="rBtn">Register →</button></div>
+<div class="row" style="border-bottom:none"><span></span><span class="hint" style="padding:0">0.1 WBOT / year · 3–32 chars</span><button class="btn btn-a" id="rBtn">Register →</button></div>
 <div class="msg" id="rMsg" style="display:none"></div>
 </div>
 
@@ -134,7 +134,7 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <button class="btn btn-a" id="mPrimary">Set primary</button>
 </span><span></span></div>
 <div class="msg" id="mMsg" style="display:none"></div>
-<div class="hint">Owner-only actions. Renewal = another 0.1 TWBOT, adds one year.</div>
+<div class="hint">Owner-only actions. Renewal = another 0.1 WBOT, adds one year.</div>
 </div>
 
 <div class="panel">
@@ -142,22 +142,22 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <div class="kv"><span>Key</span><b>keccak256(label)</b></div>
 <div class="kv"><span>Validation</span><b>a-z 0-9 -, no edge dash</b></div>
 <div class="kv"><span>Expiry</span><b>renew before it lapses</b></div>
-<div class="kv"><span>Fee token</span><b>TestWBOT</b></div>
+<div class="kv"><span>Fee token</span><b>WBOT</b></div>
 </div>
 </div>
 </div>
 
 <footer><div class="wrap">
-<p style="margin-bottom:2px">BotNames — on-chain name registry on BOT Chain. Testnet deployment; test tokens have no monetary value.</p>
+<p style="margin-bottom:2px">BotNames — on-chain name registry on BOT Chain. Live on mainnet; real assets with real value.</p>
 <div class="proof">
-<div class="proof-title">Proof on BOT Testnet</div>
+<div class="proof-title">Proof on BOT Mainnet</div>
 <div class="proof-grid">
-<span>Chain ID</span><span class="val">968</span>
-<span>Contract</span><span class="val">0x2d41cdfbaC769696f5c2cA1630a293c28B2BEC2E</span>
+<span>Chain ID</span><span class="val">677</span>
+<span>Contract</span><span class="val">0x2a5E0eBDb19dE0A360edB101436c6B6f3A7f1dc7</span>
 </div>
 <div class="proof-links">
 <a href="https://botchain.ai" target="_blank" rel="noopener" class="proof-link">BOT Chain Website &#8599;</a>
-<a href="https://scan.bohr.life/address/0x2d41cdfbaC769696f5c2cA1630a293c28B2BEC2E" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
+<a href="https://scan.botchain.ai/" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
 </div>
 </div>
 </div></footer>
