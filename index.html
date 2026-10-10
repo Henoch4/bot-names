@@ -118,6 +118,22 @@ function contracts() {
 }
 const short = (a) => (a ? a.slice(0, 6) + '…' + a.slice(-4) : '—');
 
+function getProvider() {
+  try {
+    if (typeof appkit !== 'undefined' && appkit && typeof appkit.getWalletProvider === 'function') {
+      const p = appkit.getWalletProvider('eip155') || appkit.getWalletProvider();
+      if (p) return p;
+    }
+  } catch (e) {}
+  return null;
+}
+async function getSigner() {
+  const wp = getProvider();
+  if (!wp) { try { appkit.open(); } catch (e) {} return null; }
+  return new ethers.BrowserProvider(wp).getSigner();
+}
+
+
 function initAppKit() {
   const adapter = new EthersAdapter();
   appkit = new AppKit({
@@ -210,7 +226,7 @@ $("#rg").onclick = async () => {
     const c = CHAINS[currentChainId];
     const free = await contracts().isAvailable(v);
     if (!free) return toast(v + ".bot is taken");
-    const s = await appkit.getSigner();
+    const s = await getSigner(); if (!s) return;;
     const me = await s.getAddress();
     const t = new ethers.Contract(c.fee, ERC20_ABI, s);
     if ((await t.balanceOf(me)) < FEE) return toast("Need 0.1 " + c.sym);
