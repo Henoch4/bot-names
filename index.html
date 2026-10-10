@@ -83,7 +83,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-s
 <div class="hero wrap">
 <div class="pill">Human-readable addresses · BOT Chain 677</div>
 <h1>Claim <em>yourname</em>.bot — the address book for BOT Chain.</h1>
-<p>BotNames maps a short, memorable label to your wallet address on-chain. 0.1 WBOT per year, transferable, resolvable by any contract or front-end.</p>
+<p>BotNames maps a short, memorable label to your wallet address on-chain. Costs 0.1 WBOT a year — yours to sell, gift or keep, and any wallet or app can read it.</p>
 <div class="cta">
 <a class="btn btn-a btn-lg" href="app.html">Launch app →</a>
 <a class="btn btn-g btn-lg" href="docs.html">Read the docs</a>
@@ -102,8 +102,8 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-s
 <h2 class="sec-t">Why BotNames</h2>
 <p class="sec-s">Nobody should paste 42 characters into a chat window. Names are the layer addresses never got.</p>
 <div class="grid3">
-<div class="card"><div class="ic">🔎</div><h3>Instant resolve</h3><p><code>resolve("alice")</code> returns the owner address and expiry in one call — no indexer, no server, straight from the contract.</p></div>
-<div class="card"><div class="ic">🔁</div><h3>Transferable &amp; renewable</h3><p>Sell or gift a name with <code>transferName</code>; keep it alive with <code>renew</code>. Everything is a normal transaction.</p></div>
+<div class="card"><div class="ic">🔎</div><h3>Instant resolve</h3><p>Anyone can look up who owns a name — instantly, publicly, straight from the chain. No lookup service, no waiting.</p></div>
+<div class="card"><div class="ic">🔁</div><h3>Transferable &amp; renewable</h3><p>Your name is yours to sell, gift, or keep for another year — every change is one ordinary wallet transaction.</p></div>
 <div class="card"><div class="ic">⭐</div><h3>Primary name</h3><p>Set one label as your primary so wallets and dapps can show <em>yourname</em>.bot instead of 0x… everywhere.</p></div>
 </div>
 </section>
@@ -112,8 +112,8 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-s
 <h2 class="sec-t">How it works</h2>
 <p class="sec-s">Register, resolve, manage — all on-chain.</p>
 <div class="steps">
-<div class="step"><b>01</b><h4>Register</h4><p>Check availability, approve 0.1 WBOT, call <code>register(label)</code>. The label is yours for one year.</p></div>
-<div class="step"><b>02</b><h4>Resolve</h4><p>Anyone calls <code>resolve(label)</code> → (owner, expires). Valid labels are hashed to a bytes32 key.</p></div>
+<div class="step"><b>01</b><h4>Register</h4><p>Check it’s free, pay 0.1 WBOT, done — the name is yours for a full year.</p></div>
+<div class="step"><b>02</b><h4>Resolve</h4><p>Anyone can look a name up and see the owner and the expiry — instantly, on-chain.</p></div>
 <div class="step"><b>03</b><h4>Manage</h4><p>Renew before expiry, transfer to another address, or set your primary name — each one transaction.</p></div>
 </div>
 </section>
