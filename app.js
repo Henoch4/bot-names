@@ -32,6 +32,7 @@ const BN_ABI = [
 const ERC20_ABI = [
   'function balanceOf(address) view returns (uint256)',
   'function approve(address,uint256) returns (bool)',
+  'function deposit() payable',
   'function allowance(address,address) view returns (uint256)',
 ];
 
@@ -176,6 +177,27 @@ async function ensureAllowance(amount) {
   return true;
 }
 
+async function ensureWbot(amount, msgId) {
+  const s = await signerOrAlert();
+  if (!s) return false;
+  const c = CONTRACTS[currentChainId];
+  const w = new ethers.Contract(c.twbot, ERC20_ABI, s);
+  const owner = await s.getAddress();
+  const bal = await w.balanceOf(owner);
+  if (bal >= amount) return true;
+  const shortfall = amount - bal;
+  const native = await s.provider.getBalance(owner);
+  const gasCost = ethers.parseUnits('0.005', 18);
+  if (native < shortfall + gasCost) {
+    showMsg(msgId, 'Need ' + fmt(shortfall + gasCost - native) + ' more BOT — fund the wallet first (wrap + gas).');
+    return false;
+  }
+  showMsg(msgId, 'Wrapping BOT → WBOT…');
+  const tx = await w.deposit({ value: shortfall });
+  await tx.wait();
+  return true;
+}
+
 function cleanLabel(v) {
   return (v || '').trim().toLowerCase().replace(/\.bot$/, '');
 }
@@ -191,6 +213,7 @@ async function doRegister() {
   const avail = await bn.isAvailable(label);
   if (!avail) return showMsg('rMsg', `${label}.bot is taken`);
   const fee = await bn.ANNUAL_FEE();
+  if (!(await ensureWbot(fee, 'rMsg'))) return;
   if (!(await ensureAllowance(fee))) return;
   const bnW = new ethers.Contract(c.bn, BN_ABI, s);
   showMsg('rMsg', 'Sending register…');
@@ -213,6 +236,7 @@ async function manageAction(action) {
   try {
     if (action === 'renew') {
       const fee = await bnW.ANNUAL_FEE();
+      if (!(await ensureWbot(fee, 'mMsg'))) return;
       if (!(await ensureAllowance(fee))) return;
       showMsg('mMsg', 'Sending renew…');
       const tx = await bnW.renew(label);
